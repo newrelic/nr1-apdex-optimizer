@@ -1,0 +1,6 @@
+{
+    "schemaType": "NERDLET",
+    "id": "nr1-apdex-optimizer-nerdlet",
+    "description": "Apdex optimizer nerdlet",
+    "displayName": "Apdex optimizer"
+}

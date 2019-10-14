@@ -1,0 +1,7 @@
+{
+    "schemaType": "LAUNCHER",
+    "id": "nr1-apdex-optimizer-launcher",
+    "description": "Optimize Apdex thresholds by analyzing historical data",
+    "displayName": "Apdex optimizer",
+    "rootNerdletId": "nr1-apdex-optimizer-nerdlet"
+}
