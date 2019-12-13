@@ -56,12 +56,9 @@ export default class ApdexTableContainer extends React.Component {
     }
 
     async fetchData() {
-        console.debug("Fetching application data for the selected account");
         this.setState({ isLoading: true });
         let rowsMap = new Map();
         const response = await NerdGraphQuery.query(this.appsQuery(this.props.accountId));
-        console.debug("response received");
-        console.debug(response); //eslint-disable-line
         let entities = response.data.actor.entitySearch.results.entities;
         for (let i = 0; i < entities.length; i++) {
             let appName = entities[i].name;
@@ -99,19 +96,23 @@ export default class ApdexTableContainer extends React.Component {
         await this.fetchSuggestedApdexT(rowsMap, "PageView");
 
         const data = await this.getData(rowsMap);
-        this.setState({ data: data });
-        this.setState({ isLoading: false });   
+        
+        this.setState({ 
+            data, 
+            isLoading: false 
+        });
     }
 
     // NerdGraph grapql (nrql) query of suggested Apdex Threshold based on percentile and other supplied parameters
     suggestedApdexTQuery(accountId, percentile, eventType) {
         const { duration } = this.props.platformState.timeRange;
         const since = `SINCE ${duration/1000/60} MINUTES AGO`;
+        const where = eventType == "Transaction" ? "WHERE transactionType = 'Web'" : "";  // Only Web Transactions
         return { 
             query: gql`{
                 actor {
                     account(id: ${accountId}) {
-                        nrql(query: "SELECT percentile(duration, ${percentile}) FROM ${eventType} ${since} FACET appName") {
+                        nrql(query: "SELECT percentile(duration, ${percentile}) FROM ${eventType} ${where} ${since} FACET appName LIMIT MAX") {
                             results
                         }
                     }
@@ -121,14 +122,14 @@ export default class ApdexTableContainer extends React.Component {
     }     
 
     // NerdGraph grapql (nrql) query of Apdex Score and volume based on percentile and other supplied parameters
-    statsQuery(accountId, appId, threshold, eventType) {
+    statsQuery(accountId, threshold, eventType) {
         const { duration } = this.props.platformState.timeRange;
         const since = `SINCE ${duration/1000/60} MINUTES AGO`;
         return { 
             query: gql`{
                 actor {
                     account(id: ${accountId}) {
-                        nrql(query: "SELECT apdex(duration, ${threshold}), count(*) AS 'Throughput' FROM ${eventType} WHERE appId = ${appId} ${since}") {
+                        nrql(query: "SELECT apdex(duration, t: ${threshold}), count(*) AS 'Throughput' FROM ${eventType} ${since} FACET appName LIMIT MAX") {
                           results
                         }
                     }
@@ -138,14 +139,14 @@ export default class ApdexTableContainer extends React.Component {
     } 
 
     // NerdGraph grapql (nrql) query of errors based on supplied parameters
-    errorsQuery(accountId, appId, eventType) {
+    errorsQuery(accountId, eventType) {
         const { duration } = this.props.platformState.timeRange;
         const since = `SINCE ${duration/1000/60} MINUTES AGO`;
         return { 
             query: gql`{
                 actor {
                     account(id: ${accountId}) {
-                        nrql(query: "SELECT count(*) FROM ${eventType} WHERE appId = ${appId} ${since}") {
+                        nrql(query: "SELECT count(*) FROM ${eventType} ${since} FACET appName LIMIT MAX") {
                           results
                         }
                     }
@@ -197,7 +198,6 @@ export default class ApdexTableContainer extends React.Component {
 
     // Convert retrieved rows to ReactTable compatible data (array of Objects)
     async getData (rowsMap) {
-        console.debug("getData");
         let data = [];
         rowsMap.forEach((value, key, map) => {
             data.push(
@@ -206,16 +206,16 @@ export default class ApdexTableContainer extends React.Component {
                     'accountId': value.accountId,
                     'apmApdexT': value.apmApdexT,
                     'apmApdexTHref': value.apmApdexTHref,
-                    'apmSuggestedApdexT': value.apmSuggestedApdexT && value.apmSuggestedApdexT.toFixed(2),
+                    'apmSuggestedApdexT': value.apmSuggestedApdexT && value.apmSuggestedApdexT.toFixed(3),
                     'apmApdexScore': value.apmApdexScore && value.apmApdexScore.toFixed(2),
                     'apmCount': value.apmCount,
-                    'apmErrorCount': value.apmErrorCount,
+                    'apmErrorCount': value.apmErrorCount ? value.apmErrorCount : value.apmApdexT ? 0 : '',
                     'browserApdexT': value.browserApdexT,
                     'browserApdexTHref': value.browserApdexTHref,
-                    'browserSuggestedApdexT': value.browserSuggestedApdexT && value.browserSuggestedApdexT.toFixed(2),
+                    'browserSuggestedApdexT': value.browserSuggestedApdexT && value.browserSuggestedApdexT.toFixed(3),
                     'browserApdexScore': value.browserApdexScore && value.browserApdexScore.toFixed(2),
                     'browserCount': value.browserCount,
-                    'browserErrorCount': value.browserErrorCount
+                    'browserErrorCount': value.browserErrorCount ? value.browserErrorCount : value.browserApdexT ? 0 : ''
                 }
             );
         });
@@ -223,29 +223,46 @@ export default class ApdexTableContainer extends React.Component {
     }
   
     async fetchStats(rowsMap) {
-        console.log("Fetching stats");
-        rowsMap.forEach(async (row, key, map) => {
-            let response = await NerdGraphQuery.query(this.statsQuery(this.props.accountId, row.apmAppId, row.apmApdexT, "Transaction"));
-            if (response.data.actor.account.nrql) row.apmApdexScore = response.data.actor.account.nrql.results[0].score;
-            if (response.data.actor.account.nrql) row.apmCount = response.data.actor.account.nrql.results[0].count;
-            response = await NerdGraphQuery.query(this.statsQuery(this.props.accountId, row.apmAppId, row.browserApdexT, "PageView"));
-            if (response.data.actor.account.nrql) row.browserApdexScore = response.data.actor.account.nrql.results[0].score;
-            if (response.data.actor.account.nrql) row.browserCount = response.data.actor.account.nrql.results[0].count;
-        });
+        let response = await NerdGraphQuery.query(this.statsQuery(this.props.accountId, 0.5, "Transaction"));
+        let results = response.data.actor.account.nrql.results;
+        for (let i = 0; i < results.length; i++) {
+            let appName = results[i].appName;
+            let row = rowsMap.get(appName);
+            if (row) {
+                row.apmCount = results[i].count;
+                row.apmApdexScore = results[i].score;
+            } 
+        }
+        response = await NerdGraphQuery.query(this.statsQuery(this.props.accountId, 7.0, "PageView"));
+        results = response.data.actor.account.nrql.results;
+        for (let i = 0; i < results.length; i++) {
+            let appName = results[i].appName;
+            let row = rowsMap.get(appName);
+            if (row) {
+                row.browserCount = results[i].count;
+                row.browserApdexScore = results[i].score;
+            }
+        }
     }
     
     async fetchErrors(rowsMap) {
-        console.log("Fetching stats");
-        rowsMap.forEach(async (row, key, map) => {
-            let response = await NerdGraphQuery.query(this.errorsQuery(this.props.accountId, row.apmAppId, "TransactionError"));
-            if (response.data.actor.account.nrql) row.apmErrorCount = response.data.actor.account.nrql.results[0].count;
-            response = await NerdGraphQuery.query(this.errorsQuery(this.props.accountId, row.browserAppId, "JavaScriptError"));
-            if (response.data.actor.account.nrql) row.browserErrorCount = response.data.actor.account.nrql.results[0].count;
-        });
+        let response = await NerdGraphQuery.query(this.errorsQuery(this.props.accountId, "TransactionError"));
+        let results = response.data.actor.account.nrql.results;
+        for (let i = 0; i < results.length; i++) {
+            let appName = results[i].appName;
+            let row = rowsMap.get(appName);
+            row.apmErrorCount = results[i].count;
+        }
+        response = await NerdGraphQuery.query(this.errorsQuery(this.props.accountId, "JavaScriptError"));
+        results = response.data.actor.account.nrql.results;
+        for (let i = 0; i < results.length; i++) {
+            let appName = results[i].appName;
+            let row = rowsMap.get(appName);
+            row.browserErrorCount = results[i].count;
+        }
     }
     
     async fetchSuggestedApdexT(rowsMap, eventType) {
-        console.log("Fetching suggested Apdex T");
         let {data} = await NerdGraphQuery.query(this.suggestedApdexTQuery(this.props.accountId, SUGGESTED_APDEX_PERCENTILE, eventType));
         let results = data.actor.account.nrql.results;
         for (let i = 0; i < results.length; i++) {

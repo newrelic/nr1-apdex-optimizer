@@ -14,7 +14,7 @@ const WARNING_COLOR = "rgb(191, 150, 0)";
 const NORMAL_COLOR = "rgb(17, 166, 0)";
 const LINK_COLOR = "rgb(0, 121, 191)";
 
-const columnDefaults = { ...ReactTableDefaults.column, headerClassName: 'wordwrap', headerStyle: {textAlign: 'left'} };
+const columnDefaults = { ...ReactTableDefaults.column, headerClassName: 'wordwrap', headerStyle: {textAlign: 'center'} };
 const columns = [
     {
         Header: 'Application Name',
@@ -23,10 +23,12 @@ const columns = [
     {
         Header: 'APM Transactions',
         accessor: 'apmCount',
+        className: 'right',
     },
     {
         Header: 'APM Transaction Errors',
         accessor: 'apmErrorCount',
+        className: 'right',
     },
     {
         Header: 'Configured APM ApdexT',
@@ -34,10 +36,12 @@ const columns = [
         Cell: cellInfo => (
             cellInfo.original.apmApdexT && <a target="_blank" href={cellInfo.original.apmApdexTHref} title="Click to launch APM app settings page in a new tab" style={{color: LINK_COLOR}} >{cellInfo.original.apmApdexT} <Icon type={Icon.TYPE.INTERFACE__OPERATIONS__EXTERNAL_LINK}/></a>
         ),
+        className: 'right',
     },
     {
-        Header: 'Current APM Apdex Score',
+        Header: 'APM Apdex Score [t:0.5]',
         accessor: 'apmApdexScore',
+        className: 'right',
     },
     {
         Header: 'Suggested APM ApdexT',
@@ -49,14 +53,17 @@ const columns = [
                 },
             };
         },
+        className: 'right',
     },
     {
         Header: 'Browser Page Views',
         accessor: 'browserCount',
+        className: 'right',
     },
     {
         Header: 'JavaScript Errors',
         accessor: 'browserErrorCount',
+        className: 'right',
     },
     {
         Header: 'Configured Browser ApdexT',
@@ -64,10 +71,12 @@ const columns = [
         Cell: cellInfo => (
             cellInfo.original.browserApdexT && <a target="_blank" href={cellInfo.original.browserApdexTHref} title="Click to launch Browser app settings page in a new tab" style={{color: LINK_COLOR}} >{cellInfo.original.browserApdexT} <Icon type={Icon.TYPE.INTERFACE__OPERATIONS__EXTERNAL_LINK}/></a>
         ),
+        className: 'right',
     },
     {
-        Header: 'Current Browser Apdex Score',
+        Header: 'Browser Apdex Score [t:7.0]',
         accessor: 'browserApdexScore',
+        className: 'right',
     },
     {
         Header: 'Suggested Browser ApdexT',
@@ -79,6 +88,7 @@ const columns = [
                 },
             };
         },
+        className: 'right',
     }
 ]
 
@@ -92,7 +102,6 @@ export default class ApdexTable extends React.Component {
     
     constructor (props) {
         super(props)
-        console.debug("Init props", this.props); //eslint-disable-line
 		this.state = {
 			search: ''
 		}
