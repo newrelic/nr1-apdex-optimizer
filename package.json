@@ -34,7 +34,7 @@
     "category": [
       "launcher"
     ],
-    "description": "Apdex Optimization is an Observability application, written using the third-party programmability SDK, which suggests Apdex Threshold optimizations for APM and Browser applications.",
+    "description": "Apdex Optimizer is an Observability application, written using the third-party programmability SDK, which suggests Apdex Threshold optimizations for APM and Browser applications.",
     "screenshots": [
       "screenshots/nr1-apdex-optimizer.png"
     ],
