@@ -30,9 +30,8 @@ assignees: ''
 
 [TIP]:  # ( Include as many relevant details about your environment as possible. )
 
-* NR1 CLI version used:
-* Browser name and version:
-* Operating System and version:
+* ex: Browser name and version:
+* ex: Operating System and version:
 
 ## Additional context
 
