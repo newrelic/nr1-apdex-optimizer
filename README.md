@@ -16,7 +16,7 @@ This Nerdpack lists APM and Browser applications for an account in a table. For 
 
 For great advice on choosing the right Apdex threshold, see Bill Kayser's New Relic [blog post](https://blog.newrelic.com/product-news/how-to-choose-apdex-t/).
 
-###About this Nerdpack
+### About this Nerdpack
 
 The application relies upon a combination of native NerdGraph and NRQL-based queries. It consists of two top-level React components, the first to identify and list available accounts, and the second to render the table. The table is based on a third-party open source React library, called react-table. It can be sorted on every column, provides pagination, and allows relevant cells to be filtered based on a search term. We have added throughput and errors so you can use those values for prioritization.
 
