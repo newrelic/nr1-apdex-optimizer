@@ -4,43 +4,42 @@
 
 ## Usage
 
-New Relic customers often ask what they should set their Apdex Thresholds to. This observability application (Nerdpack) provides actionable recommendations based on existing best practice, and provides links to the relevant page to make the suggested changes.
+nr1-apdex-optimizer provides actionable recommendations for Apdex threshold settings. These recommendations are based on existing best practices and provide links to the relevant page where you can make the suggested changes.
 
-If you have an app that has been running for a while in a steady state and you feel you have a good baseline for acceptable performance, you can start by setting your Apdex threshold to give you a baseline Apdex score of 0.95. So you’ll want to get the 90th percentile value and set that to Apdex T.
+This Nerdpack lists APM and Browser applications for an account in a table. For each application, you can see the currently configured Apdex thresholds along with links to the application settings page where you can change the Apdex threshold (ApdexT). The table also lists suggested APM and Browser Apdex thresholds, which are updated based on the time picker period.
 
-The suggested thresholds are based on the 90th percentile. It is recommended that the time picker is set to 7 days.
- 
-This follows great advice provided by Bill Kayser on the New Relic company [blog](https://blog.newrelic.com/product-news/how-to-choose-apdex-t/).
+
 
 ![Screenshot #1](screenshots/nr1-apdex-optimizer.png)
 
-Once selected, each APM and Browser application for the account is listed in a table. For each application the currently configured Apdex Thresholds are presented, along with links to the application settings page where changes to the Apdex Threshold (ApdexT) can be made. Suggested APM and Browser Apdex Thresholds are provided and are updated based upon the time picker period.
 
-In the case of deploying to a master account, a drop down allows each sub-account to be selected. If deployed to a single sub-account, the account is automatically selected.
 
-The application relies upon a combination of native NerdGraph and NRQL-based queries. It consists of two top-level React components, the first to identify and list the user's available accounts, and the second to render the table. Based upon a third-party open source React library, react-table, the table can be sorted on every column, provides pagination and allow relevant cells to be filtered based on a search term. Throughput and errors have been added to allow users to use those values for prioritization.
+For great advice on choosing the right Apdex threshold, see Bill Kayser's New Relic [blog post](https://blog.newrelic.com/product-news/how-to-choose-apdex-t/).
 
-## Open Source License
+### About this Nerdpack
+
+The application relies upon a combination of native NerdGraph and NRQL-based queries. It consists of two top-level React components, the first to identify and list available accounts, and the second to render the table. The table is based on a third-party open source React library, called react-table. It can be sorted on every column, provides pagination, and allows relevant cells to be filtered based on a search term. We have added throughput and errors so you can use those values for prioritization.
+
+## Open source license
 
 This project is distributed under the [Apache 2 license](LICENSE).
 
 ## What do you need to make this work?
 
-1. [New Relic APM](https://newrelic.com/products/application-monitoring) and/or [Browser agent(s)](https://newrelic.com/products/browser-monitoring) installed, and the related access to [New Relic One](https://newrelic.com/platform).
-2. See step 1. :grin:
+Make sure you have [New Relic APM](https://newrelic.com/products/application-monitoring) and/or [Browser agents](https://newrelic.com/products/browser-monitoring) installed, as well as related access to [New Relic One](https://newrelic.com/platform).
 
 ## Getting started
 
-1. First, ensure that you have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [NPM](https://www.npmjs.com/get-npm) installed. If you're unsure whether you have one or both of them installed, run the following command(s) (If you have them installed these commands will return a version number, if not, the commands won't be recognized):
+1. Ensure that you have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [NPM](https://www.npmjs.com/get-npm) installed. If you need to check, run the following commands, which will return version numbers if you have one or both installed, and will not be recognized if you don't.
 
 ```bash
 git --version
 npm -v
 ```
 
-2. Next, install the [NR1 CLI](https://one.newrelic.com/launcher/developer-center.launcher) by going to [this link](https://one.newrelic.com/launcher/developer-center.launcher) and following the instructions (5 minutes or less) to install and setup your New Relic development environment.
+2. Follow the [**Quick start**](https://one.newrelic.com/launcher/developer-center.launcher) instructions to install the NR1 CLI (5 minutes or less) and set up your New Relic development environment.
 
-3. Next, to clone this repository and run the code locally against your New Relic data, execute the following command:
+3. Clone this repo and run the code locally against your New Relic data:
 
 ```bash
 nr1 nerdpack:clone -r https://github.com/newrelic/nr1-apdex-optimizer.git
@@ -63,11 +62,16 @@ nr1 nerdpack:deploy [-c [DEV|BETA|STABLE]] [--profile=your_profile_name]
 nr1 nerdpack:subscribe [-c [DEV|BETA|STABLE]] [--profile=your_profile_name]
 ```
 
-Visit [https://one.newrelic.com](https://one.newrelic.com), navigate to the Nerdpack, and :sparkles:
+Visit [https://one.newrelic.com](https://one.newrelic.com), navigate to the Nerdpack and get started.
+
+### Tips for using the app
+
+* If you have an app that has been running for awhile in a steady state and you have a good baseline for acceptable performance, set your Apdex threshold to give you a baseline Apdex score of 0.95. To do this, get the 90th percentile value and set that to Apdex T and set the time picker to 7 days. For information information, see [Changing your Apdex settings](https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/change-your-apdex-settings). 
+* When deploying to a master account, select each sub-account from a drop-down menu. If deployed to a single sub-account, the account is automatically selected.
 
 # Support
 
-New Relic has open-sourced this project. This project is provided AS-IS WITHOUT WARRANTY OR DEDICATED SUPPORT. Issues and contributions should be reported to the project here on GitHub.
+New Relic has open-sourced this project. This project is provided AS-IS WITHOUT WARRANTY OR DEDICATED SUPPORT. Issues and contributions should be reported here on GitHub.
 
 We encourage you to bring your experiences and questions to the [Explorers Hub](https://discuss.newrelic.com) where our community members collaborate on solutions and new ideas.
 
@@ -75,15 +79,14 @@ We encourage you to bring your experiences and questions to the [Explorers Hub](
 
 New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub. You can find this project's topic/threads here:
 
-https://discuss.newrelic.com/t/nr1-apdex-optimizer/<CHANGEME>
-*(Note: URL subject to change before GA)*
+https://discuss.newrelic.com/t/nr1-apdex-optimizer/
 
-## Issues / Enhancement Requests
+## Issues / enhancement requests
 
 Issues and enhancement requests can be submitted in the [Issues tab of this repository](../../issues). Please search for and review the existing open issues before submitting a new issue.
 
 # Contributing
 
-Contributions are welcome (and if you submit a Enhancement Request, expect to be invited to contribute it yourself :grin:). Please review our [Contributors Guide](CONTRIBUTING.md).
+Contributions are welcome and we encourage you to submit enhancements. Please review our [Contributors Guide](CONTRIBUTING.md) before you begin.
 
-Keep in mind that when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. If you'd like to execute our corporate CLA, or if you have any questions, please drop us an email at opensource+nr1-apdex-optimizer@newrelic.com.
+When you submit your pull request, you'll need to sign the CLA by using CLA-Assistant. If you'd like to execute our corporate CLA, or if you have any questions, please drop us an email at opensource+nr1-apdex-optimizer@newrelic.com.
