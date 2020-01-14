@@ -45,7 +45,7 @@ export default class ApdexOptimizer extends React.Component {
                         What should I set T to?
                     </HeadingText>
                     <BlockText type="paragraph" style={{marginBottom: 8}}>
-                        If you have an app that has been running for a while in a steady state and you feel you have a good
+                        If you have an app that has been running for awhile in a steady state and you feel you have a good
                         baseline for acceptable performance, you can start by setting your Apdex threshold to give you a
                         baseline Apdex score of 0.95. So you’ll want to get the 90th percentile value and set that to Apdex T.
                     </BlockText>
