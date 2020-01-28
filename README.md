@@ -79,7 +79,7 @@ We encourage you to bring your experiences and questions to the [Explorers Hub](
 
 New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub. You can find this project's topic/threads here:
 
-https://discuss.newrelic.com/t/nr1-apdex-optimizer/
+https://discuss.newrelic.com/t/nr1-apdex-optimizer-nerdpack/92054
 
 ## Issues / enhancement requests
 
