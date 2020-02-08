@@ -251,14 +251,18 @@ export default class ApdexTableContainer extends React.Component {
         for (let i = 0; i < results.length; i++) {
             let appName = results[i].appName;
             let row = rowsMap.get(appName);
-            row.apmErrorCount = results[i].count;
+            if (row) {
+                row.apmErrorCount = results[i].count;
+            }
         }
         response = await NerdGraphQuery.query(this.errorsQuery(this.props.accountId, "JavaScriptError"));
         results = response.data.actor.account.nrql.results;
         for (let i = 0; i < results.length; i++) {
             let appName = results[i].appName;
             let row = rowsMap.get(appName);
-            row.browserErrorCount = results[i].count;
+            if (row) {
+                row.browserErrorCount = results[i].count;
+            }
         }
     }
     
@@ -268,8 +272,10 @@ export default class ApdexTableContainer extends React.Component {
         for (let i = 0; i < results.length; i++) {
             let appName = results[i].appName;
             let row = rowsMap.get(appName);
-            let suggestedApdexT = results[i]["percentile.duration"][SUGGESTED_APDEX_PERCENTILE];
-            eventType === "Transaction" ? row.apmSuggestedApdexT = suggestedApdexT : row.browserSuggestedApdexT = suggestedApdexT;
+            if (row) {
+                let suggestedApdexT = results[i]["percentile.duration"][SUGGESTED_APDEX_PERCENTILE];
+                eventType === "Transaction" ? row.apmSuggestedApdexT = suggestedApdexT : row.browserSuggestedApdexT = suggestedApdexT;
+            }
         }
     }    
 
