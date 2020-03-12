@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ReactTable, { ReactTableDefaults } from "react-table";
 import "react-table/react-table.css";
 import "./styles.scss";
-import { Icon } from 'nr1';
 
 const DEFAULT_APM_APDEX_T = 0.5;
 const DEFAULT_BROWSER_APDEX_T = 7;
@@ -34,7 +33,7 @@ const columns = [
         Header: 'Configured APM ApdexT',
         accessor: 'apmApdexT',
         Cell: cellInfo => (
-            cellInfo.original.apmApdexT && <a target="_blank" href={cellInfo.original.apmApdexTHref} title="Click to launch APM app settings page in a new tab" style={{color: LINK_COLOR}} >{cellInfo.original.apmApdexT} <Icon type={Icon.TYPE.INTERFACE__OPERATIONS__EXTERNAL_LINK}/></a>
+            cellInfo.original.apmApdexT && <a target="_blank" href={cellInfo.original.apmApdexTHref} title="Click to launch APM app settings page in a new tab" style={{color: LINK_COLOR}} >{cellInfo.original.apmApdexT}</a>
         ),
         className: 'right',
     },
@@ -69,7 +68,7 @@ const columns = [
         Header: 'Configured Browser ApdexT',
         accessor: 'browserApdexT',
         Cell: cellInfo => (
-            cellInfo.original.browserApdexT && <a target="_blank" href={cellInfo.original.browserApdexTHref} title="Click to launch Browser app settings page in a new tab" style={{color: LINK_COLOR}} >{cellInfo.original.browserApdexT} <Icon type={Icon.TYPE.INTERFACE__OPERATIONS__EXTERNAL_LINK}/></a>
+            cellInfo.original.browserApdexT && <a target="_blank" href={cellInfo.original.browserApdexTHref} title="Click to launch Browser app settings page in a new tab" style={{color: LINK_COLOR}} >{cellInfo.original.browserApdexT}</a>
         ),
         className: 'right',
     },

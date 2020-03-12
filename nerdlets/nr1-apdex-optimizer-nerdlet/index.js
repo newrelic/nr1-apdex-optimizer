@@ -1,5 +1,5 @@
 import React from 'react';
-import { BlockText, HeadingText, Icon, PlatformStateContext, Stack, StackItem } from 'nr1';
+import { BlockText, HeadingText, PlatformStateContext, Stack, StackItem } from 'nr1';
 import AccountListSelect from "./AccountListSelect";
 // import ApdexTableContainer from "./ApdexTableContainer";
 import ApdexTableContainer from "./ApdexTableContainer";
@@ -53,7 +53,7 @@ export default class ApdexOptimizer extends React.Component {
                         The suggested thresholds above are based on the 90th percentile. It is recommended that the time picker is set to 7 days.
                     </BlockText>
                     <BlockText type="paragraph" style={{marginBottom: 8}}>
-                        Based on a mathematical <a target="_blank"  href="https://blog.newrelic.com/product-news/how-to-choose-apdex-t/" style={{color: LINK_COLOR}} >analysis <Icon type={Icon.TYPE.INTERFACE__OPERATIONS__EXTERNAL_LINK}/></a>.
+                        Based on a mathematical <a target="_blank"  href="https://blog.newrelic.com/product-news/how-to-choose-apdex-t/" style={{color: LINK_COLOR}} >analysis</a>.
                     </BlockText>
                 </StackItem>
             </Stack>
