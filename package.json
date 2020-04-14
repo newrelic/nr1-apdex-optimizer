@@ -1,40 +1,31 @@
 {
   "private": true,
   "name": "nr1-apdex-optimizer",
+  "version": "1.0.3",
   "description": "Nerdpack apdex-optimizer",
-  "version": "1.0.2",
+  "main": "nerdlets/nr1-apdex-optimizer-nerdlet/index.js",
   "scripts": {
     "start": "nr1 nerdpack:serve",
     "test": "exit 0",
     "eslint-check": "eslint nerdlets/",
     "eslint-fix": "eslint nerdlets/ --fix"
   },
-  "dependencies": {
-    "file-loader": "^4.2.0",
-    "graphql": "^14.4.2",
-    "graphql-tag": "^2.10.1",
-    "prop-types": "^15.6.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-select": "^3.0.4",
-    "react-table": "^6.10.0",
-    "url-loader": "^2.1.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newrelic/nr1-apdex-optimizer.git"
   },
-  "nrlabs": {
-    "author": {
-      "name": "Craig Shanks",
-      "email": "cshanks@newrelic.com",
-      "url": "https://source.datanerd.us/cshanks"
-    },
-    "blog": "https://newrelic.jiveon.com/people/cshanks@newrelic.com/blog/2019/09/27/an-apdex-optimization-nerdpack",
-    "category": [
-      "launcher"
-    ],
-    "description": "Apdex Optimizer is an Observability application, written using the third-party programmability SDK, which suggests Apdex Threshold optimizations for APM and Browser applications.",
-    "screenshots": [
-      "screenshots/nr1-apdex-optimizer.png"
-    ],
-    "usageInstructions": "Clone the repo to review the code."
+  "author": "Craig Shanks",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/newrelic/nr1-apdex-optimizer/issues"
+  },
+  "homepage": "https://github.com/newrelic/nr1-apdex-optimizer#readme",
+  "dependencies": {
+    "graphql": "^14.6.0",
+    "graphql-tag": "^2.10.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-table": "^6.10.0"
   },
   "browserslist": [
     "last 2 versions",
@@ -42,12 +33,7 @@
     "not dead"
   ],
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.16.0",
-    "prettier": "^1.18.2",
-    "webpack": "^4.41.4"
+    "eslint": "^6.8.0",
+    "prettier": "^2.0.4"
   }
 }
