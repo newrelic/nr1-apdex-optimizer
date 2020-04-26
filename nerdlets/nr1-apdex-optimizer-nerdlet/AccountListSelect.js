@@ -1,58 +1,64 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import { AccountsQuery, Dropdown, DropdownItem, Spinner } from 'nr1';
 
 export default class AccountListSelect extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            accountName: 'Select account...'
-        }
-        this.onAccountChange = this.onAccountChange.bind(this);
-    }
+  static propTypes = {
+    onAccountChange: PropTypes.func.isRequired
+  };
 
-    onAccountChange(item) {
-        this.setState({ accountName: item.name });
-        this.props.onAccountChange(item.id);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      accountName: 'Select account...'
+    };
+    this.onAccountChange = this.onAccountChange.bind(this);
+  }
 
-    // Actions to perform on initial load
-    componentDidMount() {
-        this.queryAccounts();
-    }
+  // Actions to perform on initial load
+  componentDidMount() {
+    this.queryAccounts();
+  }
 
-    async queryAccounts() {
-        let {data} = await AccountsQuery.query();
-        // Automatically load the account if there is only one
-        if (data.length === 1) this.onAccountChange(data[0]);
-    }
+  onAccountChange(item) {
+    this.setState({ accountName: item.name });
+    this.props.onAccountChange(item.id);
+  }
 
-    render() {
-        return (
-            <AccountsQuery>
-                {({ loading, error, data }) => {
-                    if (loading) {
-                        return <Spinner />;
-                    }
+  async queryAccounts() {
+    const { data } = await AccountsQuery.query();
+    // Automatically load the account if there is only one
+    if (data.length === 1) this.onAccountChange(data[0]);
+  }
 
-                    if (error) {
-                        return 'Error!';
-                    }
+  render() {
+    return (
+      <AccountsQuery>
+        {({ loading, error, data }) => {
+          if (loading) {
+            return <Spinner />;
+          }
 
-                    const dropDownitems = data.map((item) => {
-                        return (
-                            <DropdownItem key={item.id} onClick={() => this.onAccountChange(item)}>                            
-                                {item.name}
-                            </DropdownItem>
-                        );
-                    });
+          if (error) {
+            return 'Error!';
+          }
 
-                    return (
-                            <Dropdown title={this.state.accountName}>
-                                {dropDownitems}
-                            </Dropdown>
-                    );
-                }}
-            </AccountsQuery>        
-        );
-    }
+          const dropDownitems = data.map(item => {
+            return (
+              <DropdownItem
+                key={item.id}
+                onClick={() => this.onAccountChange(item)}
+              >
+                {item.name}
+              </DropdownItem>
+            );
+          });
+
+          return (
+            <Dropdown title={this.state.accountName}>{dropDownitems}</Dropdown>
+          );
+        }}
+      </AccountsQuery>
+    );
+  }
 }
