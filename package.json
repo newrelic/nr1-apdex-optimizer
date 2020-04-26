@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "nr1-apdex-optimizer",
-  "version": "1.0.5",
+  "version": "1.2.1",
   "description": "Nerdpack apdex-optimizer",
   "main": "nerdlets/nr1-apdex-optimizer-nerdlet/index.js",
   "scripts": {
