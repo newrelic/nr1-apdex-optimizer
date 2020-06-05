@@ -2,7 +2,7 @@
 
 # nr1-apdex-optimizer
 
-![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr1-apdex-optimizer?include_prereleases&sort=semver) [![Snyk](https://snyk.io/test/github/newrelic/nr1-apdex-optimizer/badge.svg)](https://snyk.io/test/github/newrelic/nr1-apdex-optimizer)
+![CI](https://github.com/newrelic/nr1-apdex-optimizer/workflows/CI/badge.svg) ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr1-apdex-optimizer?include_prereleases&sort=semver) [![Snyk](https://snyk.io/test/github/newrelic/nr1-apdex-optimizer/badge.svg)](https://snyk.io/test/github/newrelic/nr1-apdex-optimizer)
 
 ## Usage
 
