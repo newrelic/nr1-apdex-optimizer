@@ -23,7 +23,7 @@
   "homepage": "https://github.com/newrelic/nr1-apdex-optimizer#readme",
   "dependencies": {
     "graphql": "^14.6.0",
-    "graphql-tag": "^2.10.3",
+    "graphql-tag": "^2.10.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-table": "^6.10.0"
