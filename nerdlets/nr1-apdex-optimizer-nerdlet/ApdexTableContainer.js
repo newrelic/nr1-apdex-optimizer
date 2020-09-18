@@ -32,14 +32,14 @@ class ApdexRow {
 export default class ApdexTableContainer extends React.Component {
   static propTypes = {
     accountId: PropTypes.number.isRequired,
-    platformState: PropTypes.object.isRequired
+    platformState: PropTypes.object.isRequired,
   };
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       data: [],
-      isLoading: true
+      isLoading: true,
     };
   }
 
@@ -106,7 +106,7 @@ export default class ApdexTableContainer extends React.Component {
 
     this.setState({
       data,
-      isLoading: false
+      isLoading: false,
     });
   }
 
@@ -125,7 +125,7 @@ export default class ApdexTableContainer extends React.Component {
                         }
                     }
                 }
-            }`
+            }`,
     };
   }
 
@@ -142,7 +142,7 @@ export default class ApdexTableContainer extends React.Component {
                         }
                     }
                 }
-            }`
+            }`,
     };
   }
 
@@ -159,7 +159,7 @@ export default class ApdexTableContainer extends React.Component {
                         }
                     }
                 }
-            }`
+            }`,
     };
   }
 
@@ -200,14 +200,14 @@ export default class ApdexTableContainer extends React.Component {
                         }
                     }
                 }
-            }`
+            }`,
     };
   }
 
   // Convert retrieved rows to ReactTable compatible data (array of Objects)
   async getData(rowsMap) {
     const data = [];
-    rowsMap.forEach(value => {
+    rowsMap.forEach((value) => {
       let apmErrorCount;
       if (value.apmErrorCount) {
         apmErrorCount = value.apmErrorCount;
@@ -238,7 +238,7 @@ export default class ApdexTableContainer extends React.Component {
         browserApdexScore:
           value.browserApdexScore && value.browserApdexScore.toFixed(2),
         browserCount: value.browserCount,
-        browserErrorCount: browserErrorCount
+        browserErrorCount: browserErrorCount,
       });
     });
     return data;

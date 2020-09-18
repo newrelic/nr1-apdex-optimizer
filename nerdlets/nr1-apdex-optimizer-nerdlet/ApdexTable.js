@@ -16,27 +16,27 @@ const LINK_COLOR = 'rgb(0, 121, 191)';
 const columnDefaults = {
   ...ReactTableDefaults.column,
   headerClassName: 'wordwrap',
-  headerStyle: { textAlign: 'center' }
+  headerStyle: { textAlign: 'center' },
 };
 const columns = [
   {
     Header: 'Application Name',
-    accessor: 'name'
+    accessor: 'name',
   },
   {
     Header: 'APM Transactions',
     accessor: 'apmCount',
-    className: 'right'
+    className: 'right',
   },
   {
     Header: 'APM Transaction Errors',
     accessor: 'apmErrorCount',
-    className: 'right'
+    className: 'right',
   },
   {
     Header: 'Configured APM ApdexT',
     accessor: 'apmApdexT',
-    Cell: cellInfo =>
+    Cell: (cellInfo) =>
       cellInfo.original.apmApdexT && (
         <a
           target="_blank"
@@ -48,12 +48,12 @@ const columns = [
           {cellInfo.original.apmApdexT}
         </a>
       ),
-    className: 'right'
+    className: 'right',
   },
   {
     Header: 'APM Apdex Score [t:0.5]',
     accessor: 'apmApdexScore',
-    className: 'right'
+    className: 'right',
   },
   {
     Header: 'Suggested APM ApdexT',
@@ -64,26 +64,26 @@ const columns = [
           color:
             rowInfo && rowInfo.row.apmSuggestedApdexT <= DEFAULT_APM_APDEX_T
               ? NORMAL_COLOR
-              : CRITICAL_COLOR
-        }
+              : CRITICAL_COLOR,
+        },
       };
     },
-    className: 'right'
+    className: 'right',
   },
   {
     Header: 'Browser Page Views',
     accessor: 'browserCount',
-    className: 'right'
+    className: 'right',
   },
   {
     Header: 'JavaScript Errors',
     accessor: 'browserErrorCount',
-    className: 'right'
+    className: 'right',
   },
   {
     Header: 'Configured Browser ApdexT',
     accessor: 'browserApdexT',
-    Cell: cellInfo =>
+    Cell: (cellInfo) =>
       cellInfo.original.browserApdexT && (
         <a
           target="_blank"
@@ -95,12 +95,12 @@ const columns = [
           {cellInfo.original.browserApdexT}
         </a>
       ),
-    className: 'right'
+    className: 'right',
   },
   {
     Header: 'Browser Apdex Score [t:7.0]',
     accessor: 'browserApdexScore',
-    className: 'right'
+    className: 'right',
   },
   {
     Header: 'Suggested Browser ApdexT',
@@ -112,31 +112,31 @@ const columns = [
             rowInfo &&
             rowInfo.row.browserSuggestedApdexT <= DEFAULT_BROWSER_APDEX_T
               ? NORMAL_COLOR
-              : CRITICAL_COLOR
-        }
+              : CRITICAL_COLOR,
+        },
       };
     },
-    className: 'right'
-  }
+    className: 'right',
+  },
 ];
 
 export default class ApdexTable extends React.Component {
   static propTypes = {
     data: PropTypes.array.isRequired,
-    isLoading: PropTypes.bool.isRequired
+    isLoading: PropTypes.bool.isRequired,
   };
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      search: ''
+      search: '',
     };
   }
 
   render() {
     let data = this.props.data;
     if (this.state.search) {
-      data = data.filter(row => {
+      data = data.filter((row) => {
         return (
           row.name.includes(this.state.search) ||
           String(row.age).includes(this.state.search) ||
@@ -153,7 +153,7 @@ export default class ApdexTable extends React.Component {
         Search:{' '}
         <input
           value={this.state.search}
-          onChange={e => this.setState({ search: e.target.value })}
+          onChange={(e) => this.setState({ search: e.target.value })}
           style={{ border: '1px solid gray', width: '20%' }}
         />
         <p>&nbsp;</p>

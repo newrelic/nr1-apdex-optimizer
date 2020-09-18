@@ -4,7 +4,7 @@ import {
   HeadingText,
   PlatformStateContext,
   Stack,
-  StackItem
+  StackItem,
 } from 'nr1';
 import AccountListSelect from './AccountListSelect';
 import ApdexTableContainer from './ApdexTableContainer';
@@ -17,14 +17,14 @@ export default class ApdexOptimizer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      accountId: null
+      accountId: null,
     };
     this.onAccountChange = this.onAccountChange.bind(this);
   }
 
   onAccountChange(accountId) {
     this.setState({
-      accountId: accountId
+      accountId: accountId,
     });
   }
 
@@ -40,7 +40,7 @@ export default class ApdexOptimizer extends React.Component {
         </StackItem>
         <StackItem>
           <PlatformStateContext.Consumer>
-            {platformState =>
+            {(platformState) =>
               this.state.accountId ? (
                 <ApdexTableContainer
                   accountId={this.state.accountId}
