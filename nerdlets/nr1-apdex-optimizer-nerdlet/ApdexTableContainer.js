@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { NerdGraphQuery } from 'nr1';
 import gql from 'graphql-tag';
 import ApdexTable from './ApdexTable';
+import { timeRangeToNrql } from '@newrelic/nr1-community';
 
 const SUGGESTED_APDEX_PERCENTILE = 90; // https://blog.newrelic.com/product-news/how-to-choose-apdex-t/
 
@@ -85,8 +86,7 @@ export default class ApdexTableContainer extends React.Component {
         row.accountId = this.props.accountId;
         if (domain === 'APM') {
           row.apmAppId = apps[i].applicationId;
-          if (apps[i].settings)
-            row.apmApdexT = apps[i].settings.apdexTarget;
+          if (apps[i].settings) row.apmApdexT = apps[i].settings.apdexTarget;
           row.apmApdexTHref = `https://rpm.newrelic.com/accounts/${row.accountId}/applications/${row.apmAppId}/settings-application`;
         } else if (domain === 'BROWSER') {
           row.browserAppId = apps[i].applicationId;
@@ -100,8 +100,7 @@ export default class ApdexTableContainer extends React.Component {
         const domain = apps[i].domain;
         if (domain === 'APM') {
           row.apmAppId = apps[i].applicationId;
-          if (apps[i].settings)
-            row.apmApdexT = apps[i].settings.apdexTarget;
+          if (apps[i].settings) row.apmApdexT = apps[i].settings.apdexTarget;
           row.apmApdexTHref = `https://rpm.newrelic.com/accounts/${row.accountId}/applications/${row.apmAppId}/settings-application`;
         } else if (domain === 'BROWSER') {
           row.browserAppId = apps[i].applicationId;
@@ -126,8 +125,7 @@ export default class ApdexTableContainer extends React.Component {
 
   // NerdGraph grapql (nrql) query of suggested Apdex Threshold based on percentile and other supplied parameters
   suggestedApdexTQuery(accountId, percentile, eventType) {
-    const { duration } = this.props.platformState.timeRange;
-    const since = `SINCE ${duration / 1000 / 60} MINUTES AGO`;
+    const since = timeRangeToNrql(this.props.platformState.timeRange);
     const where =
       eventType === 'Transaction' ? "WHERE transactionType = 'Web'" : ''; // Only Web Transactions
     return {
@@ -145,8 +143,7 @@ export default class ApdexTableContainer extends React.Component {
 
   // NerdGraph grapql (nrql) query of Apdex Score and volume based on percentile and other supplied parameters
   statsQuery(accountId, threshold, eventType) {
-    const { duration } = this.props.platformState.timeRange;
-    const since = `SINCE ${duration / 1000 / 60} MINUTES AGO`;
+    const since = timeRangeToNrql(this.props.platformState.timeRange);
     return {
       query: gql`{
                 actor {
@@ -162,8 +159,7 @@ export default class ApdexTableContainer extends React.Component {
 
   // NerdGraph grapql (nrql) query of errors based on supplied parameters
   errorsQuery(accountId, eventType) {
-    const { duration } = this.props.platformState.timeRange;
-    const since = `SINCE ${duration / 1000 / 60} MINUTES AGO`;
+    const since = timeRangeToNrql(this.props.platformState.timeRange);
     return {
       query: gql`{
                 actor {
@@ -183,7 +179,9 @@ export default class ApdexTableContainer extends React.Component {
       query: gql`{
                 actor {
                     entitySearch(query: "accountId = '${accountId}' AND domain IN ('APM', 'BROWSER')") {
-                        results (cursor: ${cursor === null ? null : '"' + cursor + '"'}) {
+                        results (cursor: ${
+                          cursor === null ? null : `"${cursor}"`
+                        }) {
                             entities {
                                 name
                                 domain
