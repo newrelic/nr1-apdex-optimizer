@@ -23,10 +23,10 @@
   "homepage": "https://github.com/newrelic/nr1-apdex-optimizer#readme",
   "dependencies": {
     "@newrelic/nr1-community": "^1.2.0",
-    "graphql": "^14.6.0",
-    "graphql-tag": "^2.10.3",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "graphql": "^14.7.0",
+    "graphql-tag": "^2.10.4",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-table": "^6.10.0"
   },
   "browserslist": [
@@ -45,7 +45,6 @@
     "eslint-plugin-prettier": "^3.2.0",
     "eslint-plugin-react": "^7.21.5",
     "file-loader": "^6.2.0",
-    "nr1": "^0.1.0",
     "prettier": "^1.19.1",
     "semantic-release": "^17.3.0",
     "typescript": "^4.1.2",
