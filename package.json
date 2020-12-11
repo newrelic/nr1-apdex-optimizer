@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "nr1-apdex-optimizer",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Nerdpack apdex-optimizer",
   "main": "nerdlets/nr1-apdex-optimizer-nerdlet/index.js",
   "scripts": {
@@ -22,10 +22,11 @@
   },
   "homepage": "https://github.com/newrelic/nr1-apdex-optimizer#readme",
   "dependencies": {
+    "@newrelic/nr1-community": "^1.2.0",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-table": "^6.10.0"
   },
   "browserslist": [
@@ -34,15 +35,20 @@
     "not dead"
   ],
   "devDependencies": {
-    "@newrelic/eslint-plugin-newrelic": "^0.3.0",
+    "@newrelic/eslint-plugin-newrelic": "^0.3.1",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
     "babel-eslint": "^10.1.0",
     "babel-runtime": "^6.26.0",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "file-loader": "^6.0.0",
-    "prettier": "^2.0.5"
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.2.0",
+    "eslint-plugin-react": "^7.21.5",
+    "file-loader": "^6.2.0",
+    "nr1": "^0.1.0",
+    "prettier": "^1.19.1",
+    "semantic-release": "^17.3.0",
+    "typescript": "^4.1.2",
+    "webpack": "^5.10.0"
   }
 }
