@@ -56,43 +56,57 @@ export default class ApdexTableContainer extends React.Component {
     }
   }
 
+  // Fetch the list of apps, paginating if necessary
+  async fetchApps() {
+    let apps = [];
+    let cursor = null;
+    let isQueryComplete = false;
+    while (!isQueryComplete) {
+      const response = await NerdGraphQuery.query(
+        this.appsQuery(this.props.accountId, cursor)
+      );
+      const entities = response.data.actor.entitySearch.results.entities;
+      if (entities !== null) apps = apps.concat(entities);
+      cursor = response.data.actor.entitySearch.results.nextCursor;
+      if (cursor === null) isQueryComplete = true;
+    }
+    return apps;
+  }
+
   async fetchData() {
     this.setState({ isLoading: true });
     const rowsMap = new Map();
-    const response = await NerdGraphQuery.query(
-      this.appsQuery(this.props.accountId)
-    );
-    const entities = response.data.actor.entitySearch.results.entities;
-    for (let i = 0; i < entities.length; i++) {
-      const appName = entities[i].name;
+    const apps = await this.fetchApps();
+    for (let i = 0; i < apps.length; i++) {
+      const appName = apps[i].name;
       if (!rowsMap.has(appName)) {
         const row = new ApdexRow(appName);
-        const domain = entities[i].domain;
+        const domain = apps[i].domain;
         row.accountId = this.props.accountId;
         if (domain === 'APM') {
-          row.apmAppId = entities[i].applicationId;
-          if (entities[i].settings)
-            row.apmApdexT = entities[i].settings.apdexTarget;
+          row.apmAppId = apps[i].applicationId;
+          if (apps[i].settings)
+            row.apmApdexT = apps[i].settings.apdexTarget;
           row.apmApdexTHref = `https://rpm.newrelic.com/accounts/${row.accountId}/applications/${row.apmAppId}/settings-application`;
         } else if (domain === 'BROWSER') {
-          row.browserAppId = entities[i].applicationId;
-          if (entities[i].settings)
-            row.browserApdexT = entities[i].settings.apdexTarget;
+          row.browserAppId = apps[i].applicationId;
+          if (apps[i].settings)
+            row.browserApdexT = apps[i].settings.apdexTarget;
           row.browserApdexTHref = `https://rpm.newrelic.com/accounts/${row.accountId}/browser/${row.apmAppId}/edit`;
         }
         rowsMap.set(appName, row);
       } else {
         const row = rowsMap.get(appName);
-        const domain = entities[i].domain;
+        const domain = apps[i].domain;
         if (domain === 'APM') {
-          row.apmAppId = entities[i].applicationId;
-          if (entities[i].settings)
-            row.apmApdexT = entities[i].settings.apdexTarget;
+          row.apmAppId = apps[i].applicationId;
+          if (apps[i].settings)
+            row.apmApdexT = apps[i].settings.apdexTarget;
           row.apmApdexTHref = `https://rpm.newrelic.com/accounts/${row.accountId}/applications/${row.apmAppId}/settings-application`;
         } else if (domain === 'BROWSER') {
-          row.browserAppId = entities[i].applicationId;
-          if (entities[i].settings)
-            row.browserApdexT = entities[i].settings.apdexTarget;
+          row.browserAppId = apps[i].applicationId;
+          if (apps[i].settings)
+            row.browserApdexT = apps[i].settings.apdexTarget;
           row.browserApdexTHref = `https://rpm.newrelic.com/accounts/${row.accountId}/browser/${row.apmAppId}/edit`;
         }
       }
@@ -164,12 +178,12 @@ export default class ApdexTableContainer extends React.Component {
   }
 
   // NerdGraph graphql query of entities in the APM and BROWSER domains
-  appsQuery(accountId) {
+  appsQuery(accountId, cursor) {
     return {
       query: gql`{
                 actor {
                     entitySearch(query: "accountId = '${accountId}' AND domain IN ('APM', 'BROWSER')") {
-                        results {
+                        results (cursor: ${cursor === null ? null : '"' + cursor + '"'}) {
                             entities {
                                 name
                                 domain
