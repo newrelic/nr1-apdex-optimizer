@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "nr1-apdex-optimizer",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Nerdpack apdex-optimizer",
   "main": "nerdlets/nr1-apdex-optimizer-nerdlet/index.js",
   "scripts": {
@@ -25,8 +25,8 @@
     "@newrelic/nr1-community": "^1.2.0",
     "graphql": "^14.7.0",
     "graphql-tag": "^2.10.4",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-table": "^6.10.0"
   },
   "browserslist": [

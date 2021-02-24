@@ -4,13 +4,13 @@ import { AccountsQuery, Dropdown, DropdownItem, Spinner } from 'nr1';
 
 export default class AccountListSelect extends React.Component {
   static propTypes = {
-    onAccountChange: PropTypes.func.isRequired,
+    onAccountChange: PropTypes.func.isRequired
   };
 
   constructor() {
     super();
     this.state = {
-      accountName: 'Select account...',
+      accountName: 'Select account...'
     };
     this.onAccountChange = this.onAccountChange.bind(this);
   }
@@ -43,7 +43,7 @@ export default class AccountListSelect extends React.Component {
             return 'Error!';
           }
 
-          const dropDownitems = data.map((item) => {
+          const dropDownitems = data.map(item => {
             return (
               <DropdownItem
                 key={item.id}
