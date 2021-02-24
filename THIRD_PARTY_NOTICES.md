@@ -700,11 +700,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 This product includes source derived from [babel-runtime](https://github.com/babel/babel/tree/master/packages/babel-runtime) ([v6.26.0](https://github.com/babel/babel/tree/master/packages/babel-runtime/tree/v6.26.0)), distributed under the [MIT License](https://github.com/babel/babel/tree/master/packages/babel-runtime/blob/v6.26.0/README.md):
 
 ```
-MIT License Copyright (c) <year> <copyright holders>
+MIT License
+
+Copyright (c) <year> <copyright holders>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice (including the next paragraph) shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
@@ -740,7 +742,7 @@ THE SOFTWARE.
 
 ### eslint-plugin-prettier
 
-This product includes source derived from [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier) ([v3.2.0](https://github.com/prettier/eslint-plugin-prettier/tree/v3.2.0)), distributed under the [MIT License](https://github.com/prettier/eslint-plugin-prettier/blob/v3.2.0/LICENSE.md):
+This product includes source derived from [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier) ([v3.3.1](https://github.com/prettier/eslint-plugin-prettier/tree/v3.3.1)), distributed under the [MIT License](https://github.com/prettier/eslint-plugin-prettier/blob/v3.3.1/LICENSE.md):
 
 ```
 # The MIT License (MIT)
@@ -772,7 +774,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 ### eslint-plugin-react
 
-This product includes source derived from [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react) ([v7.21.5](https://github.com/yannickcr/eslint-plugin-react/tree/v7.21.5)), distributed under the [MIT License](https://github.com/yannickcr/eslint-plugin-react/blob/v7.21.5/LICENSE):
+This product includes source derived from [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react) ([v7.22.0](https://github.com/yannickcr/eslint-plugin-react/tree/v7.22.0)), distributed under the [MIT License](https://github.com/yannickcr/eslint-plugin-react/blob/v7.22.0/LICENSE):
 
 ```
 The MIT License (MIT)
@@ -872,7 +874,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### semantic-release
 
-This product includes source derived from [semantic-release](https://github.com/semantic-release/semantic-release) ([v17.3.0](https://github.com/semantic-release/semantic-release/tree/v17.3.0)), distributed under the [MIT License](https://github.com/semantic-release/semantic-release/blob/v17.3.0/LICENSE):
+This product includes source derived from [semantic-release](https://github.com/semantic-release/semantic-release) ([v17.3.9](https://github.com/semantic-release/semantic-release/tree/v17.3.9)), distributed under the [MIT License](https://github.com/semantic-release/semantic-release/blob/v17.3.9/LICENSE):
 
 ```
 MIT License
@@ -901,7 +903,7 @@ SOFTWARE.
 
 ### typescript
 
-This product includes source derived from [typescript](https://github.com/Microsoft/TypeScript) ([v4.1.2](https://github.com/Microsoft/TypeScript/tree/v4.1.2)), distributed under the [Apache-2.0 License](https://github.com/Microsoft/TypeScript/blob/v4.1.2/LICENSE.txt):
+This product includes source derived from [typescript](https://github.com/Microsoft/TypeScript) ([v4.2.2](https://github.com/Microsoft/TypeScript/tree/v4.2.2)), distributed under the [Apache-2.0 License](https://github.com/Microsoft/TypeScript/blob/v4.2.2/LICENSE.txt):
 
 ```
 Apache License
@@ -964,7 +966,7 @@ END OF TERMS AND CONDITIONS
 
 ### webpack
 
-This product includes source derived from [webpack](https://github.com/webpack/webpack) ([v5.10.0](https://github.com/webpack/webpack/tree/v5.10.0)), distributed under the [MIT License](https://github.com/webpack/webpack/blob/v5.10.0/LICENSE):
+This product includes source derived from [webpack](https://github.com/webpack/webpack) ([v5.24.1](https://github.com/webpack/webpack/tree/v5.24.1)), distributed under the [MIT License](https://github.com/webpack/webpack/blob/v5.24.1/LICENSE):
 
 ```
 Copyright JS Foundation and other contributors
