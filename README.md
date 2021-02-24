@@ -50,6 +50,7 @@ nr1 nerdpack:serve
 ```
 
 Visit [https://one.newrelic.com/?nerdpacks=local](https://one.newrelic.com/?nerdpacks=local), navigate to the Nerdpack, and :sparkles:
+[https://one.eu.newrelic.com/?nerdpacks=local](https://one.eu.newrelic.com/?nerdpacks=local) if your account is in the EU region data center.
 
 ## Deploying this Nerdpack
 
@@ -65,6 +66,7 @@ nr1 nerdpack:subscribe [-c [DEV|BETA|STABLE]] [--profile=your_profile_name]
 ```
 
 Visit [https://one.newrelic.com](https://one.newrelic.com), navigate to the Nerdpack and get started.
+[https://one.eu.newrelic.com](https://one.eu.newrelic.com) if your account is in the EU region data center.
 
 ### Tips for using the app
 
